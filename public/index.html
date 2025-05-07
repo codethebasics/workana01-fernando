@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO | Gerador de Sites Futuristas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5.5.2/dist/iro.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #00f0ff;
+            --secondary: #9600ff;
+            --accent: #ff00e6;
+            --dark: #0a0a1a;
+            --light: #f0f0ff;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            height: 100vh;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--dark);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 5px;
+            border: 2px solid var(--dark);
+        }
+
+        h1, h2, h3, h4, .font-futuristic {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .holographic-bg {
+            position: relative;
+            background: radial-gradient(circle at center, rgba(10,10,30,0.9) 0%, rgba(5,5,15,0.95) 100%);
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .cyber-glass {
+            background: rgba(15, 15, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .cyber-border {
+            position: relative;
+            border-radius: 16px;
+        }
+
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-mask:
+                    linear-gradient(to bottom, #fff, transparent) content-box,
+                    linear-gradient(to bottom, #fff, transparent) content-box;
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--accent);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cyber-input {
+            background: rgba(10, 10, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .cyber-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.3);
+            outline: none;
+        }
+
+        .neon-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            z-index: 1;
+            border: none;
+        }
+
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+
+        .neon-btn:hover::before {
+            left: 100%;
+        }
+
+        .grid-pattern {
+            background-image:
+                    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .matrix-code {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .matrix-char {
+            position: absolute;
+            color: rgba(0, 240, 255, 0.7);
+            font-family: monospace;
+            font-size: 16px;
+            animation: matrix-fall linear infinite;
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.7);
+        }
+
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+
+        /* Futuristic UI Elements */
+        .holographic-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            z-index: 10;
+        }
+
+
+        .cyber-panel {
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .cyber-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+
+        .cyber-tab {
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            position: relative;
+        }
+
+
+        .cyber-tab.active {
+            background: rgba(40, 40, 80, 0.9);
+            border-color: var(--primary);
+        }
+
+
+        .cyber-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+
+        .data-cell {
+            background: rgba(15, 15, 35, 0.8);
+            padding: 12px;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+
+        .status-active {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+
+        .status-inactive {
+            background: #666;
+        }
+
+
+        .cyber-select {
+            background: rgba(10, 10, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+
+        .cyber-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.3);
+            outline: none;
+        }
+
+
+        .cyber-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+
+        .cyber-checkbox:checked {
+            border-color: var(--accent);
+            background-color: rgba(255, 0, 230, 0.1);
+        }
+
+
+        .cyber-checkbox:checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            color: var(--accent);
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .cyber-radio {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+
+        .cyber-radio:checked {
+            border-color: var(--accent);
+        }
+
+
+        .cyber-radio:checked::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .holographic-effect {
+            position: relative;
+        }
+
+
+        .holographic-effect::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                    linear-gradient(135deg, rgba(0,240,255,0.05) 0%, transparent 50%),
+                    linear-gradient(225deg, rgba(150,0,255,0.05) 0%, transparent 50%),
+                    linear-gradient(315deg, rgba(255,0,230,0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+
+        .holographic-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                    radial-gradient(circle at 30% 30%, rgba(0,240,255,0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 70%, rgba(150,0,255,0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 20%, rgba(255,0,230,0.03) 0%, transparent 50%);
+            animation: holographic 20s linear infinite;
+            z-index: -2;
+        }
+
+
+        @keyframes holographic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .carousel-control.prev {
+            left: 10px;
+        }
+
+
+        .carousel-control.next {
+            right: 10px;
+        }
+
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+
+
+        .carousel-indicator.active {
+            background: var(--primary);
+            box-shadow: 0 0 5px var(--primary);
+        }
+
+
+        .template-preview {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: #0a0a1a;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+
+        .template-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
+        .template-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+
+
+        .template-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+
+        .template-desc {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+
+        /* Loading spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+
+        /* Status messages */
+        .status-message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+
+        .status-success {
+            background-color: rgba(0, 200, 83, 0.2);
+            border-left: 3px solid #00c853;
+            color: #00e676;
+        }
+
+
+        .status-error {
+            background-color: rgba(213, 0, 0, 0.2);
+            border-left: 3px solid #d50000;
+            color: #ff5252;
+        }
+
+
+        /* Fixes for scrolling */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+
+        /* Custom styles for color pickers */
+        .iro__slider {
+            width: 100% !important;
+            height: 10px !important;
+            margin-top: 10px;
+        }
+
+
+        .iro__colorPicker {
+            width: 100% !important;
+        }
+
+
+        .iro__box {
+            height: 100px !important;
+        }
+
+
+        .color-picker-container {
+            margin-bottom: 15px;
+        }
+
+
+        .color-picker-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+
+        /* Edit Layout Controls */
+        .edit-controls {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+
+        .edit-controls.active {
+            display: block;
+        }
+
+
+        .edit-controls-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+
+        .edit-mode-active {
+            outline: 2px dashed var(--primary);
+            padding: 10px;
+            min-height: 50px;
+        }
+
+
+        .editable-highlight {
+            background-color: rgba(0, 240, 255, 0.1);
+            outline: 1px dashed rgba(0, 240, 255, 0.5);
+            transition: all 0.2s;
+        }
+
+
+        .editable-highlight:hover {
+            background-color: rgba(0, 240, 255, 0.2);
+            outline: 1px dashed var(--primary);
+        }
+    </style>
+</head>
+<body class="holographic-bg">
+    <div id="particles-js"></div>
+    <div class="matrix-code" id="matrix-code"></div>
+
+    <!-- Main App Container -->
+    <main class="app-container">
+        <!-- App Header -->
+        <header class="py-4 px-6 border-b border-gray-800">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center glow-effect">
+                            <i class="fas fa-robot text-lg text-white"></i>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-accent rounded-full pulse-animation"></div>
+                    </div>
+                    <h1 class="text-2xl font-bold font-futuristic">
+                        <span class="gradient-text">NEO</span> <span class="text-white">DESIGN</span>
+                    </h1>
+                    <div class="text-sm text-gray-400 font-mono hidden md:block">v3.2.1</div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-2 text-gray-400">
+                        <div class="status-indicator status-active"></div>
+                        <span>Conectado</span>
+                    </div>
+                    <button class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm flex items-center neon-btn">
+                        <i class="fas fa-user-astronaut mr-2"></i>
+                        <span class="hidden md:inline">Usuário</span>
+                    </button>
+                    <button class="p-2 text-gray-400 hover:text-primary">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Main App Content -->
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Sidebar -->
+            <aside class="w-16 md:w-64 bg-gray-900/50 border-r border-gray-800 flex flex-col">
+                <nav class="flex-1 p-2 space-y-1">
+                    <button class="w-full flex items-center p-3 rounded-lg bg-primary/10 text-primary">
+                        <i class="fas fa-magic text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Gerador</span>
+                    </button>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-folder text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Projetos</span>
+                    </button>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-palette text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Temas</span>
+                    </button>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-cube text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Componentes</span>
+                    </button>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-database text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Assets</span>
+                    </button>
+                </nav>
+
+                <div class="p-4 border-t border-gray-800">
+                    <div class="hidden md:block text-xs text-gray-500 mb-2">SISTEMA</div>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-terminal text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Console</span>
+                    </button>
+                    <button class="w-full flex items-center p-3 rounded-lg text-gray-400 hover:text-primary hover:bg-gray-800/50">
+                        <i class="fas fa-question-circle text-lg w-8"></i>
+                        <span class="ml-2 hidden md:inline">Ajuda</span>
+                    </button>
+                </div>
+            </aside>
+
+
+            <!-- Main Content Area -->
+            <div class="main-content p-6 grid-pattern">
+                <!-- Generator Panel -->
+                <div class="max-w-6xl mx-auto">
+                    <div id="status-message" class="status-message"></div>
+
+                    <div class="cyber-panel rounded-xl overflow-hidden mb-6">
+                        <div class="flex border-b border-gray-800">
+                            <div class="cyber-tab active px-6 py-3 rounded-tl-lg">
+                                <i class="fas fa-sliders-h mr-2"></i>
+                                <span class="hidden md:inline">Configurações</span>
+                            </div>
+                            <div class="cyber-tab px-6 py-3">
+                                <i class="fas fa-code mr-2"></i>
+                                <span class="hidden md:inline">Código</span>
+                            </div>
+                            <div class="cyber-tab px-6 py-3 rounded-tr-lg">
+                                <i class="fas fa-chart-line mr-2"></i>
+                                <span class="hidden md:inline">Otimização</span>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <!-- Left Column - Style Settings -->
+                                <div class="cyber-glass rounded-xl p-4 h-fit">
+                                    <h3 class="text-lg font-bold font-futuristic mb-4 flex items-center">
+                                        <i class="fas fa-paint-brush mr-2 text-primary"></i>
+                                        Estilo Visual
+                                    </h3>
+
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Tema</label>
+                                            <div class="grid grid-cols-3 gap-2">
+                                                <label class="cursor-pointer">
+                                                    <input type="radio" name="theme" value="futuristic" class="cyber-radio hidden" checked>
+                                                    <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                        <i class="fas fa-robot text-xl mb-1 text-primary"></i>
+                                                        <div class="text-xs">Futurista</div>
+                                                    </div>
+                                                </label>
+                                                <label class="cursor-pointer">
+                                                    <input type="radio" name="theme" value="modern" class="cyber-radio hidden">
+                                                    <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                        <i class="fas fa-star text-xl mb-1 text-yellow-400"></i>
+                                                        <div class="text-xs">Moderno</div>
+                                                    </div>
+                                                </label>
+                                                <label class="cursor-pointer">
+                                                    <input type="radio" name="theme" value="minimal" class="cyber-radio hidden">
+                                                </label>
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-minimize text-xl mb-1 text-white"></i>
+                                                </div>
+                                                <div class="text-xs">Minimalista</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Cores</label>
+                                        <div class="space-y-3">
+                                            <div class="color-picker-container">
+                                                <label class="color-picker-label">Primária</label>
+                                                <div id="color-picker-primary" class="w-full"></div>
+                                            </div>
+                                            <div class="color-picker-container">
+                                                <label class="color-picker-label">Secundária</label>
+                                                <div id="color-picker-secondary" class="w-full"></div>
+                                            </div>
+                                            <div class="color-picker-container">
+                                                <label class="color-picker-label">Destaque</label>
+                                                <div id="color-picker-accent" class="w-full"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Efeitos</label>
+                                        <div class="space-y-2">
+                                            <label class="flex items-center space-x-3 cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox" checked>
+                                                <span class="flex-1 text-sm">Partículas</span>
+                                            </label>
+                                            <label class="flex items-center space-x-3 cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox" checked>
+                                                <span class="flex-1 text-sm">Holográfico</span>
+                                            </label>
+                                            <label class="flex items-center space-x-3 cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox">
+                                                <span class="flex-1 text-sm">3D</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Middle Column - Generator -->
+                            <div class="lg:col-span-2 space-y-4">
+                                <div class="cyber-glass rounded-xl p-4">
+                                    <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
+                                        <i class="fas fa-terminal mr-2 text-accent"></i>
+                                        Comando de Geração
+                                    </h3>
+
+                                    <textarea
+                                            id="command-input"
+                                            rows="5"
+                                            placeholder="Descreva o site que deseja criar...\nEx: Landing page futurista para app de realidade aumentada com cores roxo e azul, animações 3D e formulário de contato..."
+                                            class="w-full px-4 py-3 cyber-input rounded-lg bg-gray-900 focus:ring-2 focus:ring-primary outline-none transition"
+                                    ></textarea>
+
+                                    <div class="flex justify-between items-center mt-2">
+                                        <div class="text-xs text-gray-400">
+                                            <i class="fas fa-info-circle mr-1"></i> Seja detalhado para melhores resultados
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="cyber-glass rounded-xl p-4">
+                                        <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
+                                            <i class="fas fa-cubes mr-2 text-primary"></i>
+                                            Componentes
+                                        </h3>
+
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-header text-lg mb-1"></i>
+                                                    <div class="text-xs">Header</div>
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-sliders-h text-lg mb-1"></i>
+                                                    <div class="text-xs">Hero</div>
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden">
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-users text-lg mb-1"></i>
+                                                    <div class="text-xs">Equipe</div>
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-envelope text-lg mb-1"></i>
+                                                    <div class="text-xs">Contato</div>
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden">
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-chart-bar text-lg mb-1"></i>
+                                                    <div class="text-xs">Gráficos</div>
+                                                </div>
+                                            </label>
+                                            <label class="cursor-pointer">
+                                                <input type="checkbox" class="cyber-checkbox hidden">
+                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
+                                                    <i class="fas fa-map text-lg mb-1"></i>
+                                                    <div class="text-xs">Mapa</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="cyber-glass rounded-xl p-4">
+                                        <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
+                                            <i class="fas fa-file-export mr-2 text-accent"></i>
+                                            Exportar
+                                        </h3>
+
+                                        <div class="space-y-3">
+                                            <div>
+                                                <label class="block text-sm text-gray-400 mb-1">Formato</label>
+                                                <select class="w-full cyber-select rounded-lg px-3 py-2 text-sm">
+                                                    <option value="html">HTML Completo</option>
+                                                    <option value="zip">ZIP (HTML + Assets)</option>
+                                                    <option value="react">Componente React</option>
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label class="block text-sm text-gray-400 mb-1">Qualidade</label>
+                                                <select class="w-full cyber-select rounded-lg px-3 py-2 text-sm">
+                                                    <option value="high">Alta (Otimizado)</option>
+                                                    <option value="medium">Média (Balanceado)</option>
+                                                    <option value="low">Baixa (Rápido)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-3">
+                                    <button id="generate-btn" class="px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-medium hover:opacity-90 transition flex items-center neon-btn glow-effect">
+                                        <i class="fas fa-bolt mr-2"></i> Gerar Site
+                                    </button>
+                                    <button id="optimize-btn" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition flex items-center neon-btn">
+                                        <i class="fas fa-magic mr-2"></i> Otimizar
+                                    </button>
+                                    <button id="clear-btn" class="px-4 py-3 bg-transparent border border-gray-700 text-gray-300 hover:text-white rounded-lg font-medium transition flex items-center neon-btn">
+                                        <i class="fas fa-trash-alt mr-2"></i> Limpar
+                                    </button>
+                                    <button id="save-btn" class="px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition flex items-center neon-btn ml-auto">
+                                        <i class="fas fa-save mr-2"></i> Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="cyber-panel rounded-xl overflow-hidden">
+                    <div class="flex justify-between items-center p-4 border-b border-gray-800">
+                        <h3 class="text-lg font-bold font-futuristic flex items-center">
+                            <i class="fas fa-eye mr-2 text-accent"></i>
+                            Pré-visualização
+                        </h3>
+                        <div class="flex space-x-2">
+                            <button id="download-btn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-lg transition flex items-center neon-btn">
+                                <i class="fas fa-download mr-1.5"></i>
+                                <span class="hidden md:inline">Baixar</span>
+                            </button>
+                            <button id="copy-btn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-lg transition flex items-center neon-btn">
+                                <i class="fas fa-copy mr-1.5"></i>
+                                <span class="hidden md:inline">Copiar</span>
+                            </button>
+                            <button id="code-btn" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-lg transition flex items-center neon-btn">
+                                <i class="fas fa-code mr-1.5"></i>
+                                <span class="hidden md:inline">Código</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="preview-container bg-gray-900 rounded-xl overflow-hidden h-96 relative" id="preview-container">
+                            <div class="flex items-center justify-center h-full text-gray-500" id="empty-preview">
+                                <div class="text-center">
+                                    <i class="fas fa-file-code text-5xl mb-4"></i>
+                                    <h4 class="text-xl font-medium mb-2">Seu site será gerado aqui</h4>
+                                    <p class="text-sm">Descreva seu site acima e clique em "Gerar Site"</p>
+                                </div>
+                            </div>
+
+                            <!-- Loading state -->
+                            <div id="loading-preview" class="hidden absolute inset-0 bg-gray-900/80 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="spinner mx-auto mb-4"></div>
+                                    <p class="text-primary font-medium">Gerando seu site futurista...</p>
+                                </div>
+                            </div>
+
+                            <!-- Generated content will be placed here -->
+                            <div id="generated-content" class="hidden h-full" style="overflow-y: auto"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Edit Layout Controls -->
+                <div id="edit-controls" class="edit-controls">
+                    <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
+                        <i class="fas fa-edit mr-2 text-accent"></i>
+                        Editar Layout
+                    </h3>
+                    <div class="edit-controls-buttons">
+                        <button id="edit-layout-btn" class="px-4 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-medium hover:opacity-90 transition flex items-center neon-btn glow-effect">
+                            <i class="fas fa-edit mr-2"></i> Editar Layout
+                        </button>
+                        <button id="save-layout-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition flex items-center neon-btn hidden">
+                            <i class="fas fa-save mr-2"></i> Salvar Layout
+                        </button>
+                        <button id="download-html-btn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition flex items-center neon-btn">
+                            <i class="fas fa-download mr-2"></i> Baixar HTML Atualizado
+                        </button>
+                    </div>
+                    <div id="edit-instructions" class="text-sm text-gray-400 mt-3 hidden">
+                        <i class="fas fa-info-circle mr-1"></i> Modo de edição ativado. Clique em qualquer elemento para editá-lo diretamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+<script>
+    // Initialize particles.js
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00f0ff" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#00f0ff", opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+        }
+
+
+        // Initialize color pickers with smaller size
+        const colorPickerPrimary = new iro.ColorPicker("#color-picker-primary", {
+            width: 150,
+            color: "#00f0ff",
+            borderWidth: 1,
+            borderColor: "#333",
+            layout: [
+                {
+                    component: iro.ui.Wheel,
+                    options: {
+                        wheelLightness: false,
+                        wheelAngle: 0,
+                        wheelDirection: 'anticlockwise'
+                    }
+                },
+                {
+                    component: iro.ui.Slider,
+                    options: {}
+                }
+            ]
+        });
+
+
+        const colorPickerSecondary = new iro.ColorPicker("#color-picker-secondary", {
+            width: 150,
+            color: "#9600ff",
+            borderWidth: 1,
+            borderColor: "#333",
+            layout: [
+                {
+                    component: iro.ui.Wheel,
+                    options: {
+                        wheelLightness: false,
+                        wheelAngle: 0,
+                        wheelDirection: 'anticlockwise'
+                    }
+                },
+                {
+                    component: iro.ui.Slider,
+                    options: {}
+                }
+            ]
+        });
+
+
+        const colorPickerAccent = new iro.ColorPicker("#color-picker-accent", {
+            width: 150,
+            color: "#ff00e6",
+            borderWidth: 1,
+            borderColor: "#333",
+            layout: [
+                {
+                    component: iro.ui.Wheel,
+                    options: {
+                        wheelLightness: false,
+                        wheelAngle: 0,
+                        wheelDirection: 'anticlockwise'
+                    }
+                },
+                {
+                    component: iro.ui.Slider,
+                    options: {}
+                }
+            ]
+        });
+
+
+        // Function to update command input with color information
+        function updateCommandWithColors() {
+            const commandInput = document.getElementById('command-input');
+            let currentText = commandInput.value;
+
+            // Remove any existing color information
+            currentText = currentText.replace(/Cores selecionadas:.*?(?=\n|$)/g, '');
+
+            // Get current colors
+            const primaryColor = colorPickerPrimary.color.hexString;
+            const secondaryColor = colorPickerSecondary.color.hexString;
+            const accentColor = colorPickerAccent.color.hexString;
+
+            // Add new color information
+            const colorInfo = `\nCores selecionadas: Primária ${primaryColor}, Secundária ${secondaryColor}, Destaque ${accentColor}`;
+
+            // Update command input
+            commandInput.value = currentText.trim() + colorInfo;
+        }
+
+
+        // Add event listeners to color pickers
+        colorPickerPrimary.on('color:change', function(color) {
+            updateCommandWithColors();
+        });
+
+
+        colorPickerSecondary.on('color:change', function(color) {
+            updateCommandWithColors();
+        });
+
+
+        colorPickerAccent.on('color:change', function(color) {
+            updateCommandWithColors();
+        });
+
+
+        // Show status message
+        function showStatusMessage(message, type) {
+            const statusElement = document.getElementById('status-message');
+            statusElement.textContent = message;
+            statusElement.className = 'status-message';
+
+            if (type === 'success') {
+                statusElement.classList.add('status-success');
+            } else if (type === 'error') {
+                statusElement.classList.add('status-error');
+            }
+
+            statusElement.style.display = 'block';
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+
+
+        // Generate website button handler
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const prompt = document.getElementById('command-input').value.trim();
+
+            if (!prompt) {
+                showStatusMessage('Por favor, descreva o site que deseja criar', 'error');
+                return;
+            }
+
+
+            // Show loading state
+            document.getElementById('empty-preview').classList.add('hidden');
+            document.getElementById('loading-preview').classList.remove('hidden');
+            document.getElementById('generated-content').classList.add('hidden');
+
+            // Simulate generation (since API integration was removed)
+            setTimeout(() => {
+                document.getElementById('loading-preview').classList.add('hidden');
+                document.getElementById('generated-content').classList.remove('hidden');
+
+                // Generate a sample website for demonstration
+                const generatedHTML = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nation for Pets - Tudo para seu Pet</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .hero-gradient {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    }
+
+    .pet-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .testimonial-card {
+        transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: scale(1.03);
+    }
+
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .floating {
+        animation: floating 6s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+        0% {
+            transform: translate(0, 0px);
+        }
+        50% {
+            transform: translate(0, 15px);
+        }
+        100% {
+            transform: translate(0, -0px);
+        }
+    }
+</style>
+</head>
+<body>
+<!-- Header/Navigation -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+            <i class="fas fa-paw text-3xl text-indigo-600 mr-2"></i>
+            <h1 class="text-2xl font-bold text-gray-800">Nation<span class="text-indigo-600">ForPets</span></h1>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+            <a href="#produtos" class="text-gray-700 hover:text-indigo-600 font-medium">Produtos</a>
+            <a href="#servicos" class="text-gray-700 hover:text-indigo-600 font-medium">Serviços</a>
+            <a href="#sobre" class="text-gray-700 hover:text-indigo-600 font-medium">Sobre Nós</a>
+            <a href="#depoimentos" class="text-gray-700 hover:text-indigo-600 font-medium">Depoimentos</a>
+            <a href="#contato" class="text-gray-700 hover:text-indigo-600 font-medium">Contato</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-700 hover:text-indigo-600">
+                <i class="fas fa-search text-xl"></i>
+            </button>
+            <button class="text-gray-700 hover:text-indigo-600 relative">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </button>
+            <button class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-16 md:py-24">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Tudo que seu pet <span class="text-yellow-300">merece</span>
+                em um só lugar!</h1>
+            <p class="text-lg mb-8 opacity-90">Produtos premium, serviços especializados e muito amor para o seu melhor
+                amigo.</p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-white text-indigo-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-shopping-bag mr-2"></i> Compre Agora
+                </button>
+                <button class="border-2 border-white text-white hover:bg-white hover:text-indigo-600 font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-play mr-2"></i> Conheça Nós
+                </button>
+            </div>
+            <div class="mt-8 flex items-center space-x-6">
+                <div class="flex -space-x-2">
+                    <img src="https://randomuser.me/api/portraits/women/12.jpg"
+                         class="w-10 h-10 rounded-full border-2 border-white" alt="Cliente">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg"
+                         class="w-10 h-10 rounded-full border-2 border-white" alt="Cliente">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg"
+                         class="w-10 h-10 rounded-full border-2 border-white" alt="Cliente">
+                </div>
+                <div>
+                    <p class="text-sm opacity-80">+10.000 clientes satisfeitos</p>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <span class="ml-2">5.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 relative">
+            <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                 alt="Cachorro feliz"
+                 class="rounded-2xl shadow-2xl w-full max-w-lg mx-auto floating">
+            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg hidden md:block">
+                <div class="flex items-center">
+                    <div class="bg-indigo-100 p-3 rounded-full mr-3">
+                        <i class="fas fa-truck text-indigo-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800">Entrega Rápida</p>
+                        <p class="text-sm text-gray-600">Em até 24h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg hidden md:block">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full mr-3">
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-800">Produtos</p>
+                        <p class="text-sm text-gray-600">100% Originais</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Brands Section -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-center text-gray-500 mb-10">Marcas Parceiras</h2>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+            <img src="https://via.placeholder.com/120x60?text=Royal+Canin" alt="Royal Canin"
+                 class="h-12 opacity-70 hover:opacity-100 transition">
+            <img src="https://via.placeholder.com/120x60?text=Pedigree" alt="Pedigree"
+                 class="h-12 opacity-70 hover:opacity-100 transition">
+            <img src="https://via.placeholder.com/120x60?text=Whiskas" alt="Whiskas"
+                 class="h-12 opacity-70 hover:opacity-100 transition">
+            <img src="https://via.placeholder.com/120x60?text=Premier" alt="Premier"
+                 class="h-12 opacity-70 hover:opacity-100 transition">
+            <img src="https://via.placeholder.com/120x60?text=Golden" alt="Golden"
+                 class="h-12 opacity-70 hover:opacity-100 transition">
+        </div>
+    </div>
+</section>
+
+
+<!-- Products Section -->
+<section id="produtos" class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Nossos <span class="text-indigo-600">Produtos</span></h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Tudo que seu pet precisa para uma vida saudável e feliz</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden pet-card transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1591769225440-811ad7d6eab2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                         alt="Ração Premium"
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        -20%
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-800">Ração Premium</h3>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                            <span class="text-sm ml-1">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Ração super premium para cães adultos, sabor carne</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-gray-500 line-through text-sm">R$ 129,90</span>
+                            <p class="text-indigo-600 font-bold text-xl">R$ 103,90</p>
+                        </div>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden pet-card transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1591946614722-2a0096b08356?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                         alt="Brinquedo para Gatos"
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-800">Brinquedo para Gatos</h3>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                            <span class="text-sm ml-1">4.9</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Varinha com penas para diversão felina</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-indigo-600 font-bold text-xl">R$ 39,90</p>
+                        </div>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden pet-card transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1550256076-d020098335b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                         alt="Coleira Premium"
+                         class="w-full h-48 object-cover">
+                    <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        Novo
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-800">Coleira Premium</h3>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                            <span class="text-sm ml-1">5.0</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Coleira ajustável com identificação</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-indigo-600 font-bold text-xl">R$ 59,90</p>
+                        </div>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden pet-card transition duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                         alt="Cama para Pets"
+                         class="w-full h-48 object-cover">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-800">Cama para Pets</h3>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                            <span class="text-sm ml-1">4.7</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Cama macia e confortável para cães e gatos</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-gray-500 line-through text-sm">R$ 199,90</span>
+                            <p class="text-indigo-600 font-bold text-xl">R$ 159,90</p>
+                        </div>
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-10 h-10 flex items-center justify-center">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                Ver Todos os Produtos
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- Services Section -->
+<section id="servicos" class="py-16 bg-indigo-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Nossos <span class="text-indigo-600">Serviços</span></h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Cuidados especializados para o bem-estar do seu pet</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-cut text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Banho & Tosa</h3>
+                <p class="text-gray-600 mb-4">Serviço completo de banho, tosa higiênica e estética com produtos de alta
+                    qualidade.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-stethoscope text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Veterinário</h3>
+                <p class="text-gray-600 mb-4">Consultas, exames e tratamentos com profissionais especializados em
+                    diversas áreas.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-home text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Hospedagem</h3>
+                <p class="text-gray-600 mb-4">Hotelzinho com estrutura completa para receber seu pet com todo conforto e
+                    segurança.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-bone text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Adestramento</h3>
+                <p class="text-gray-600 mb-4">Treinamento comportamental com métodos positivos para melhorar a
+                    convivência.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-paw text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Creche</h3>
+                <p class="text-gray-600 mb-4">Programa de atividades supervisionadas para socialização e gasto de
+                    energia.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 hover:shadow-lg transition duration-300">
+                <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-5">
+                    <i class="fas fa-truck text-indigo-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Delivery</h3>
+                <p class="text-gray-600 mb-4">Entrega rápida de rações, medicamentos e produtos em geral para seu
+                    pet.</p>
+                <a href="#" class="text-indigo-600 font-medium flex items-center">
+                    Saiba mais <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- About Section -->
+<section id="sobre" class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                     alt="Equipe NationForPets"
+                     class="rounded-xl shadow-lg w-full">
+            </div>
+            <div class="lg:w-1/2">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Sobre a <span
+                        class="text-indigo-600">NationForPets</span></h2>
+                <p class="text-gray-600 mb-6">Fundada em 2010, a NationForPets nasceu da paixão por animais e da vontade
+                    de oferecer produtos e serviços de qualidade para os pets e seus tutores.</p>
+
+                <div class="mb-6">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-100 p-2 rounded-full mr-4">
+                            <i class="fas fa-check text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Missão</h4>
+                            <p class="text-gray-600">Proporcionar bem-estar e qualidade de vida aos pets através de
+                                produtos e serviços especializados.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-100 p-2 rounded-full mr-4">
+                            <i class="fas fa-eye text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Visão</h4>
+                            <p class="text-gray-600">Ser referência nacional no mercado pet até 2025, com expansão para
+                                todo território nacional.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-indigo-100 p-2 rounded-full mr-4">
+                            <i class="fas fa-heart text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Valores</h4>
+                            <p class="text-gray-600">Amor pelos animais, ética, transparência, inovação e
+                                responsabilidade social.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-50 p-6 rounded-xl">
+                    <div class="flex flex-wrap -mx-2">
+                        <div class="w-1/2 px-2 mb-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="text-3xl font-bold text-indigo-600">12+</p>
+                                <p class="text-gray-600">Anos no mercado</p>
+                            </div>
+                        </div>
+                        <div class="w-1/2 px-2 mb-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="text-3xl font-bold text-indigo-600">50+</p>
+                                <p class="text-gray-600">Profissionais</p>
+                            </div>
+                        </div>
+                        <div class="w-1/2 px-2">
+                            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="text-3xl font-bold text-indigo-600">10K+</p>
+                                <p class="text-gray-600">Clientes satisfeitos</p>
+                            </div>
+                        </div>
+                        <div class="w-1/2 px-2">
+                            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                                <p class="text-3xl font-bold text-indigo-600">5K+</p>
+                                <p class="text-gray-600">Produtos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section id="depoimentos" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">O que dizem sobre <span class="text-indigo-600">nós</span>
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Depoimentos de clientes que confiam em nossos produtos e
+                serviços</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white rounded-xl shadow-md p-8 testimonial-card">
+                <div class="flex mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 mb-6">"Meu cachorro adorou a ração premium que comprei aqui. Notamos diferença
+                    na pelagem e energia dele em poucas semanas!"</p>
+                <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Silva"
+                         class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h4 class="font-bold text-gray-800">Ana Silva</h4>
+                        <p class="text-gray-500 text-sm">Tutora do Thor</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="bg-white rounded-xl shadow-md p-8 testimonial-card">
+                <div class="flex mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 mb-6">"O serviço de banho e tosa é excelente! Minha gata que normalmente odeia
+                    banho saiu tranquila e cheirosa. Profissionais muito atenciosos."</p>
+                <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Carlos Oliveira"
+                         class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h4 class="font-bold text-gray-800">Carlos Oliveira</h4>
+                        <p class="text-gray-500 text-sm">Tutor da Luna</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="bg-white rounded-xl shadow-md p-8 testimonial-card">
+                <div class="flex mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 mb-6">"Compro todos os produtos para meus 3 cachorros aqui. Atendimento
+                    excelente, entrega rápida e sempre tem promoções boas. Recomendo!"</p>
+                <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Mariana Costa"
+                         class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h4 class="font-bold text-gray-800">Mariana Costa</h4>
+                        <p class="text-gray-500 text-sm">Tutora de Rex, Bob e Meg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- CTA Section -->
+<section class="py-16 bg-indigo-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Pronto para dar o melhor para seu pet?</h2>
+        <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">Junte-se a milhares de tutores satisfeitos que confiam na
+            NationForPets para cuidar de seus melhores amigos.</p>
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <button class="bg-white text-indigo-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 pulse-animation">
+                <i class="fas fa-shopping-cart mr-2"></i> Comprar Agora
+            </button>
+            <button class="border-2 border-white text-white hover:bg-white hover:text-indigo-600 font-bold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                <i class="fas fa-phone-alt mr-2"></i> Fale Conosco
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contato" class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row">
+            <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Entre em <span class="text-indigo-600">Contato</span>
+                </h2>
+                <p class="text-gray-600 mb-8">Tem dúvidas, sugestões ou precisa de ajuda? Nossa equipe está pronta para
+                    te atender!</p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Endereço</h4>
+                            <p class="text-gray-600">Rua dos Animais, 123 - Petrópolis, Rio de Janeiro</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-phone-alt text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Telefone</h4>
+                            <p class="text-gray-600">(21) 1234-5678</p>
+                            <p class="text-gray-600">(21) 98765-4321 (WhatsApp)</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-envelope text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                            <p class="text-gray-600">contato@nationforpets.com.br</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-clock text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Horário de Funcionamento</h4>
+                            <p class="text-gray-600">Segunda a Sexta: 8h às 20h</p>
+                            <p class="text-gray-600">Sábado: 9h às 18h</p>
+                            <p class="text-gray-600">Domingo: 10h às 16h</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h4 class="font-bold text-gray-800 mb-4">Siga-nos nas redes sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                           class="bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                           class="bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                           class="bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                           class="bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2">
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Envie uma mensagem</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                            <input type="text" id="name"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                            <input type="tel" id="phone"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                        </div>
+                        <div class="mb-4">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Assunto</label>
+                            <select id="subject"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                                <option value="">Selecione um assunto</option>
+                                <option value="products">Produtos</option>
+                                <option value="services">Serviços</option>
+                                <option value="delivery">Entrega</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                            <textarea id="message" rows="5"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"></textarea>
+                        </div>
+                        <button type="submit"
+                                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Newsletter Section -->
+<section class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4 text-center">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-3">Receba nossas novidades</h3>
+            <p class="text-gray-600 mb-6">Assine nossa newsletter e receba promoções exclusivas, dicas de cuidados e
+                novidades sobre o mundo pet.</p>
+            <form class="flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Seu melhor email"
+                       class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent">
+                <button type="submit"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 whitespace-nowrap">
+                    Assinar Newsletter
+                </button>
+            </form>
+            <p class="text-xs text-gray-500 mt-4">Não compartilhamos seus dados. Veja nossa <a href="#"
+                                                                                               class="text-indigo-600 underline">Política
+                de Privacidade</a>.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white pt-12 pb-6">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-paw text-2xl text-indigo-400 mr-2"></i>
+                    <h3 class="text-xl font-bold">Nation<span class="text-indigo-400">ForPets</span></h3>
+                </div>
+                <p class="text-gray-400 mb-4">Tudo que seu pet precisa para uma vida feliz e saudável.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-4">Links Úteis</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Minha Conta</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Meus Pedidos</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Rastreamento</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Lista de Desejos</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-4">Informações</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Sobre Nós</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Termos e Condições</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Trocas e Devoluções</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Perguntas Frequentes</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-4">Formas de Pagamento</h4>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fab fa-cc-visa text-2xl"></i>
+                    </div>
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fab fa-cc-mastercard text-2xl"></i>
+                    </div>
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fab fa-cc-amex text-2xl"></i>
+                    </div>
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fab fa-cc-paypal text-2xl"></i>
+                    </div>
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fas fa-barcode text-2xl"></i>
+                    </div>
+                    <div class="bg-gray-700 p-2 rounded flex items-center justify-center">
+                        <i class="fas fa-money-bill-wave text-2xl"></i>
+                    </div>
+                </div>
+                <h4 class="text-lg font-bold mb-2">Atendimento</h4>
+                <p class="text-gray-400">sac@nationforpets.com.br</p>
+                <p class="text-gray-400">(21) 1234-5678</p>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 NationForPets. Todos os direitos reservados.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Política de Privacidade</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Termos de Serviço</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Mapa do Site</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- WhatsApp Float Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="#"
+       class="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+</div>
+
+
+<script>
+    // Simple JavaScript for demonstration purposes
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mobile menu toggle functionality would go here
+        console.log('NationForPets - Tudo para seu pet!');
+
+        // Add to cart animation
+        const addToCartButtons = document.querySelectorAll('.pet-card button');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                const productCard = this.closest('.pet-card');
+                productCard.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    productCard.style.transform = '';
+                }, 300);
+
+                // Here you would normally add to cart logic
+                alert('Produto adicionado ao carrinho!');
+            });
+        });
+
+        // Form submission
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                this.reset();
+            });
+        }
+
+        // Newsletter form
+        const newsletterForm = document.querySelector('.bg-white form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                alert(\`Obrigado por assinar nossa newsletter! Um email foi enviado para teste@email.com\`);
+                    emailInput.value = '';
+                });
+            }
+        });
+    <\/script>
+</body>
+</html>
+
+
+`;
+
+                document.getElementById('generated-content').innerHTML = generatedHTML;
+
+                // Show edit controls after generation
+                document.getElementById('edit-controls').classList.add('active');
+
+                showStatusMessage('Site gerado com sucesso! Agora você pode editar o layout.', 'success');
+            }, 2000);
+        });
+
+
+        // Clear button handler
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            document.getElementById('command-input').value = '';
+            document.getElementById('empty-preview').classList.remove('hidden');
+            document.getElementById('loading-preview').classList.add('hidden');
+            document.getElementById('generated-content').classList.add('hidden');
+            document.getElementById('edit-controls').classList.remove('active');
+            showStatusMessage('Campos limpos com sucesso', 'success');
+        });
+
+
+        // Other button handlers (placeholder)
+        document.getElementById('optimize-btn').addEventListener('click', function() {
+            showStatusMessage('Otimização disponível apenas na versão completa', 'error');
+        });
+
+
+        document.getElementById('save-btn').addEventListener('click', function() {
+            showStatusMessage('Salvamento disponível apenas na versão completa', 'error');
+        });
+
+
+        document.getElementById('download-btn').addEventListener('click', function() {
+            showStatusMessage('Download disponível apenas na versão completa', 'error');
+        });
+
+
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            showStatusMessage('Cópia disponível apenas na versão completa', 'error');
+        });
+
+
+        document.getElementById('code-btn').addEventListener('click', function() {
+            showStatusMessage('Visualização de código disponível apenas na versão completa', 'error');
+        });
+
+
+        // Edit Layout Functionality
+        let isEditMode = false;
+        const editLayoutBtn = document.getElementById('edit-layout-btn');
+        const saveLayoutBtn = document.getElementById('save-layout-btn');
+        const downloadHtmlBtn = document.getElementById('download-html-btn');
+        const editInstructions = document.getElementById('edit-instructions');
+        const generatedContent = document.getElementById('generated-content');
+
+
+        editLayoutBtn.addEventListener('click', function() {
+            isEditMode = !isEditMode;
+
+            if (isEditMode) {
+                // Enter edit mode
+                editLayoutBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Sair do Modo Edição';
+                editLayoutBtn.classList.remove('bg-gradient-to-r', 'from-primary', 'to-accent');
+                editLayoutBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                saveLayoutBtn.classList.remove('hidden');
+                editInstructions.classList.remove('hidden');
+
+                // Make all elements editable
+                makeElementsEditable(generatedContent);
+
+                showStatusMessage('Modo de edição ativado. Clique em qualquer elemento para editá-lo.', 'success');
+            } else {
+                // Exit edit mode
+                editLayoutBtn.innerHTML = '<i class="fas fa-edit mr-2"></i> Editar Layout';
+                editLayoutBtn.classList.add('bg-gradient-to-r', 'from-primary', 'to-accent');
+                editLayoutBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                saveLayoutBtn.classList.add('hidden');
+                editInstructions.classList.add('hidden');
+
+                // Remove editable state
+                removeEditableState(generatedContent);
+
+                showStatusMessage('Modo de edição desativado', 'success');
+            }
+        });
+
+
+        saveLayoutBtn.addEventListener('click', function() {
+            showStatusMessage('Alterações salvas com sucesso', 'success');
+        });
+
+
+        downloadHtmlBtn.addEventListener('click', function() {
+            if (!generatedContent.innerHTML.trim()) {
+                showStatusMessage('Nenhum conteúdo para exportar', 'error');
+                return;
+            }
+
+            // Get the HTML content
+            const htmlContent = `
+                    <!DOCTYPE html>
+                    <html lang="pt-BR">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Site Gerado por NEO Design</title>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                        <style>
+                            body {
+                                font-family: 'Rajdhani', sans-serif;
+                                background-color: #0a0a1a;
+                                color: #f0f0ff;
+                                margin: 0;
+                                padding: 0;
+                            }
+
+                            .gradient-text {
+                                background: linear-gradient(90deg, ${colorPickerPrimary.color.hexString}, ${colorPickerAccent.color.hexString});
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            }
+
+                            .cyber-glass {
+                                background: rgba(15, 15, 35, 0.6);
+                                backdrop-filter: blur(10px);
+                                -webkit-backdrop-filter: blur(10px);
+                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+                            }
+
+                            .glow-effect {
+                                box-shadow: 0 0 15px ${colorPickerPrimary.color.hexString}80;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${generatedContent.innerHTML}
+                    </body>
+                    </html>`
+        })
+    })
+</script>
+<script src="script.js"></script>
+
+

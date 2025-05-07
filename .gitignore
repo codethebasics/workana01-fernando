@@ -1,37 +1,32 @@
-# Node modules
-node_modules/
+# Diretório da IDE JetBrains (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
 
-# Logs
-logs/
+# Logs e arquivos de cache
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Environment files
-.env
-
-# Coverage directory
-coverage/
-
-# Build output
+# Configurações de build locais
+out/
 dist/
 build/
 
-# Optional: cache directories
-.cache/
-.next/
-.out/
+# Node.js
+node_modules/
 
-# Optional: VSCode config
-.vscode/
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
 
-# Optional: local environment settings
-*.local
+# Ambientes específicos
+.env
+.env.*  # caso use .env.development, .env.production etc.
 
-# Optional: Mac OS files
-*.DS_Store
+# Testes
+coverage/
+
+# Arquivos de lock (caso não queira versionar)
+# yarn.lock
+# package-lock.json
+
+# Sistema operacional (opcional)
+*.swp
