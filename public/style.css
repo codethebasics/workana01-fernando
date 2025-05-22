@@ -640,3 +640,9 @@ h1, h2, h3, h4, .font-futuristic {
     background-color: rgba(0, 240, 255, 0.2);
     outline: 1px dashed var(--primary);
 }
+
+.editable {
+    outline: 2px dashed #00f0ff;
+    outline-offset: 2px;
+    cursor: text;
+}

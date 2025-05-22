@@ -134,7 +134,7 @@
                                             <label class="block text-sm text-gray-400 mb-2">Tema</label>
                                             <div class="grid grid-cols-3 gap-2">
                                                 <label class="cursor-pointer">
-                                                    <input type="radio" name="theme" value="futuristic" class="cyber-radio hidden" checked>
+                                                    <input type="radio" name="theme" value="futuristic" class="cyber-radio hidden">
                                                     <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
                                                         <i class="fas fa-robot text-xl mb-1 text-primary"></i>
                                                         <div class="text-xs">Futurista</div>
@@ -149,11 +149,11 @@
                                                 </label>
                                                 <label class="cursor-pointer">
                                                     <input type="radio" name="theme" value="minimal" class="cyber-radio hidden">
-                                                </label>
                                                 <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
                                                     <i class="fas fa-minimize text-xl mb-1 text-white"></i>
-                                                </div>
                                                 <div class="text-xs">Minimalista</div>
+                                            </div>
+                                            </label>
                                             </div>
                                         </div>
                                     </div>
@@ -221,61 +221,7 @@
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <!-- =========== -->
-                                    <!-- Componentes -->
-                                    <!-- =========== -->
-                                    <div class="cyber-glass rounded-xl p-4">
-                                        <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
-                                            <i class="fas fa-cubes mr-2 text-primary"></i>
-                                            Componentes
-                                        </h3>
-
-                                        <div class="grid grid-cols-3 gap-2">
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-header text-lg mb-1"></i>
-                                                    <div class="text-xs">Header</div>
-                                                </div>
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-sliders-h text-lg mb-1"></i>
-                                                    <div class="text-xs">Hero</div>
-                                                </div>
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden">
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-users text-lg mb-1"></i>
-                                                    <div class="text-xs">Equipe</div>
-                                                </div>
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden" checked>
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-envelope text-lg mb-1"></i>
-                                                    <div class="text-xs">Contato</div>
-                                                </div>
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden">
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-chart-bar text-lg mb-1"></i>
-                                                    <div class="text-xs">Gráficos</div>
-                                                </div>
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <input type="checkbox" class="cyber-checkbox hidden">
-                                                <div class="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg border border-transparent hover:border-primary transition text-center">
-                                                    <i class="fas fa-map text-lg mb-1"></i>
-                                                    <div class="text-xs">Mapa</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-
+                                
                                     <!-- ======== -->
                                     <!-- Exportar -->
                                     <!-- ======== -->
@@ -377,7 +323,7 @@
 
 
                 <!-- Edit Layout Controls -->
-                <div id="edit-controls" class="edit-controls">
+                <div id="edit-controls" class="edit-controls active">
                     <h3 class="text-lg font-bold font-futuristic mb-3 flex items-center">
                         <i class="fas fa-edit mr-2 text-accent"></i>
                         Editar Layout
@@ -1464,7 +1410,7 @@
                 document.getElementById('generated-content').innerHTML = generatedHTML;
 
                 // Show edit controls after generation
-                document.getElementById('edit-controls').classList.add('active');
+               // document.getElementById('edit-controls').classList.add('active');
 
                 showStatusMessage('Site gerado com sucesso! Agora você pode editar o layout.', 'success');
             }, 2000);
@@ -1477,7 +1423,6 @@
             document.getElementById('empty-preview').classList.remove('hidden');
             document.getElementById('loading-preview').classList.add('hidden');
             document.getElementById('generated-content').classList.add('hidden');
-            document.getElementById('edit-controls').classList.remove('active');
             showStatusMessage('Campos limpos com sucesso', 'success');
         });
 
